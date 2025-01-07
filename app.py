@@ -47,26 +47,22 @@ def generate_report(ticker, sections, financials, balance_sheet, cashflow, recom
 
     # Add financials if selected
     if "Financials" in sections:
-        financial_summary = summarize_data(financials)
-        financial_report = generate_section_report(ticker, "Financials", financial_summary)
+        financial_report = generate_section_report(ticker, "Financials", financials)
         final_report.append(financial_report)
 
     # Add balance sheet if selected
     if "Balance Sheet" in sections:
-        balance_sheet_summary = summarize_data(balance_sheet)
-        balance_sheet_report = generate_section_report(ticker, "Balance Sheet", balance_sheet_summary)
+        balance_sheet_report = generate_section_report(ticker, "Balance Sheet", balance_sheet)
         final_report.append(balance_sheet_report)
 
     # Add cash flow if selected
     if "Cash Flow" in sections:
-        cashflow_summary = summarize_data(cashflow)
-        cashflow_report = generate_section_report(ticker, "Cash Flow", cashflow_summary)
+        cashflow_report = generate_section_report(ticker, "Cash Flow", cashflow)
         final_report.append(cashflow_report)
 
     # Add analyst recommendations if selected
     if "Analyst Recommendations" in sections:
-        recommendations_summary = summarize_data(recommendations)
-        recommendations_report = generate_section_report(ticker, "Analyst Recommendations", recommendations_summary)
+        recommendations_report = generate_section_report(ticker, "Analyst Recommendations", recommendations)
         final_report.append(recommendations_report)
 
     return "\n\n".join(final_report)
