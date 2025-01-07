@@ -67,13 +67,6 @@ def generate_report(ticker, sections, financials, balance_sheet, cashflow, recom
 
     return "\n\n".join(final_report)
 
-# Function to summarize data (optional based on section)
-def summarize_data(data):
-    summary = {}
-    for col in data.columns:
-        summary[col] = data[col].iloc[0]  # Only take the most recent data
-    return summary
-
 # Function to generate a section report using Cohere
 def generate_section_report(ticker, section, data):
     prompt = (
