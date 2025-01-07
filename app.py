@@ -4,7 +4,7 @@ import yfinance as yf
 
 # Llama API details
 llama_api_key = st.secrets["LLAMA-API"]
-llama_url = "https://api.llama.ai/generate"  # Example endpoint, replace with actual Llama API URL
+llama_url = "https://cfarc-xim.streamlit.app"  # Example endpoint, replace with actual Llama API URL
 
 # Streamlit App
 def main():
