@@ -24,10 +24,14 @@ def main():
                 financials = company_data.financials
                 balance_sheet = company_data.balance_sheet
                 cashflow = company_data.cashflow
-                recommendations = company_data.recommendations
+
+                # Summarize the data
+                financial_summary = summarize_data(financials)
+                balance_sheet_summary = summarize_data(balance_sheet)
+                cashflow_summary = summarize_data(cashflow)
 
                 # Generate the report
-                report = generate_report(company_ticker, financials, balance_sheet, cashflow, recommendations)
+                report = generate_report(company_ticker, financial_summary, balance_sheet_summary, cashflow_summary)
                 st.subheader("Generated Report")
                 st.write(report)
             except Exception as e:
@@ -35,15 +39,23 @@ def main():
         else:
             st.error("Please enter a valid company ticker to generate the report.")
 
+# Function to summarize the financial data
+def summarize_data(data):
+    # Get the key metrics (e.g., Total Revenue, Net Income)
+    summary = {}
+    for col in data.columns:
+        summary[col] = data[col].iloc[0]  # Only take the most recent data
+    return summary
+
 # Function to generate the report using Cohere
-def generate_report(ticker, financials, balance_sheet, cashflow, recommendations):
+def generate_report(ticker, financial_summary, balance_sheet_summary, cashflow_summary):
     prompt = (
         f"Write a comprehensive CFA Research Challenge report for {ticker}. "
         f"The report should include an analysis of the financials, balance sheet, cash flow, and generate an analyst recommendation based on this data. "
         f"Here are the key details:\n"
-        f"Financials:\n{financials.to_string()}\n"
-        f"Balance Sheet:\n{balance_sheet.to_string()}\n"
-        f"Cash Flow:\n{cashflow.to_string()}\n"
+        f"Financials:\n{financial_summary}\n"
+        f"Balance Sheet:\n{balance_sheet_summary}\n"
+        f"Cash Flow:\n{cashflow_summary}\n"
     )
     
     try:
