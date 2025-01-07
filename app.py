@@ -74,6 +74,7 @@ def generate_report(ticker, sections, financials, balance_sheet, cashflow, recom
 
     # Add cash flow if selected
     if "Cash Flow" in sections:# Function to generate the company info section
+
 def generate_company_info_report(name, industry, sector, description):
     return (
         f"**Company Information**\n\n"
