@@ -74,7 +74,7 @@ def generate_section_report(ticker, section, data):
         f"Section: {section}\n"
         f"Include an analysis of the key metrics in the following data:\n"
         f"{data}\n"
-        f"Go into very great detail, and ensure that the reader has a clear view of what's going on."
+        f"Go into very great detail, mention numbers, data, calculate key ratios, and ensure that the reader has a clear view of what's going on, and the reader here is a CFA Charterholder."
     )
     
     try:
