@@ -73,7 +73,16 @@ def generate_report(ticker, sections, financials, balance_sheet, cashflow, recom
         final_report.append(balance_sheet_report)
 
     # Add cash flow if selected
-    if "Cash Flow" in sections:# Function to generate the company info section
+    if "Cash Flow" in sections:
+        cashflow_report = generate_section_report(ticker, "Cash Flow", cashflow)
+        final_report.append(cashflow_report)
+
+    # Add analyst recommendations if selected
+    if "Analyst Recommendations" in sections:
+        recommendations_report = generate_section_report(ticker, "Analyst Recommendations", recommendations)
+        final_report.append(recommendations_report)
+
+    return "\n\n".join(final_report)
 
 def generate_company_info_report(name, industry, sector, description):
     return (
