@@ -77,10 +77,11 @@ def summarize_data(data):
 # Function to generate a section report using Cohere
 def generate_section_report(ticker, section, data):
     prompt = (
-        f"Write a detailed CFA Research Challenge section report for {ticker}. "
+        f"You're an analyst at BlackRock. Write a detailed CFA Research Challenge section report for {ticker}. "
         f"Section: {section}\n"
         f"Include an analysis of the key metrics in the following data:\n"
         f"{data}\n"
+        f"Go into very great detail, and ensure that the reader has a clear view of what's going on."
     )
     
     try:
