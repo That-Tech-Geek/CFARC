@@ -101,7 +101,7 @@ def generate_company_info_report_with_cohere(name, industry, sector, description
     response = co.generate(
         model='command-light',  # Adjust the model name if necessary
         prompt=prompt,
-        max_tokens=500,
+        max_tokens=500000,
         temperature=0.7
     )
     return f"**Company Information**\n\n{response.generations[0].text}"
