@@ -1,10 +1,10 @@
 import streamlit as st
-import requests
+import cohere
 import yfinance as yf
 
-# Llama API details
-llama_api_key = st.secrets["LLAMA-API"]
-llama_url = "https://cfarc-xim.streamlit.app"  # Example endpoint, replace with actual Llama API URL
+# Initialize Cohere Client
+cohere_api_key = st.secrets["LLAMA-API"]
+co = cohere.Client(cohere_api_key)
 
 # Streamlit App
 def main():
@@ -35,7 +35,7 @@ def main():
         else:
             st.error("Please enter a valid company ticker to generate the report.")
 
-# Function to generate the report using Llama
+# Function to generate the report using Cohere
 def generate_report(ticker, financials, balance_sheet, cashflow, recommendations):
     prompt = (
         f"Write a comprehensive CFA Research Challenge report for {ticker}. "
@@ -46,20 +46,17 @@ def generate_report(ticker, financials, balance_sheet, cashflow, recommendations
         f"Cash Flow:\n{cashflow.to_string()}\n"
     )
     
-    # Requesting response from Llama
-    headers = {"Authorization": f"Bearer {llama_api_key}"}
-    payload = {
-        "model": "llama-v1",  # Replace with the correct model name
-        "prompt": prompt,
-        "max_tokens": 500,
-        "temperature": 0.7
-    }
-    response = requests.post(llama_url, headers=headers, json=payload)
-    
-    if response.status_code == 200:
-        return response.json()["text"]
-    else:
-        return f"Error generating report: {response.status_code} - {response.text}"
+    try:
+        # Requesting response from Cohere API
+        response = co.generate(
+            model='command-light',  # Adjust the model name if necessary
+            prompt=prompt,
+            max_tokens=500,
+            temperature=0.7
+        )
+        return response.generations[0].text  # Return the generated text
+    except Exception as e:
+        return f"Error generating report: {e}"
 
 if __name__ == "__main__":
     main()
